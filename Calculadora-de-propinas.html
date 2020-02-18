@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora de propina</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<h1><b>Calculadora de propinas</b></h1>
+
+	<form>
+		<p>¿Cuanto costó todo?</p>
+		$<input id="input--costo" type="text" placeholder="Costo Total">
+		<p>¿Como calificarias la atención?</p>
+		<select id="select--atencion">
+			<option disabled selected value="0">Seleccionar</option>
+			<option value="0.3">30% - Una mantequita</option>
+			<option value="0.2">20% - Buena</option>
+			<option value="0.15">15% Ponele que bien</option>
+			<option value="0.1">10%&nbsp; - &nbsp; Malarda</option>
+			<option value="0.05">5% - Si sabia no venia</option>
+		</select>
+		<p>¿Cuantos comparten la cuenta?</p>
+		<input id="input--personas" type="text"placeholder="Cantidad de Personas" > Personas
+
+		<br><br>
+
+		<button type="button" id="btn--calcular">Calcular</button>
+	</form>
+	<br>
+	<div id="div--propina">
+		Cada uno tiene que poner: $ <span id="span--resultado"></span> 
+	</div>
+	<script>
+		document.getElementById("div--propina").style.display = "none";
+		function calcularPropina(){
+			var costoTotal = document.getElementById("input--costo").value;
+			var calidadAtencion = document.getElementById("select--atencion").value;
+			var cantidadPersonas = document.getElementById("input--personas").value;
+			if(costoTotal == "" || calidadAtencion == 0 || cantidadPersonas == "" || cantidadPersonas < 1) {
+				alert("Ingresá los valores, capoeira");
+				return;
+			}
+
+			console.log('Costo: $'+costoTotal);
+			console.log('Calidad de la atencion: '+calidadAtencion);
+			console.log('Propina total: '+ costoTotal*calidadAtencion);
+			console.log('Cantidad de personas: '+cantidadPersonas);
+		
+
+			var totalPorCabeza = (costoTotal * calidadAtencion) / cantidadPersonas;
+
+			totalPorCabeza = Math.round(totalPorCabeza*100)/100;
+			totalPorCabeza = totalPorCabeza.toFixed(2);
+
+			document.getElementById("span--resultado").innerHTML = totalPorCabeza;
+			document.getElementById("div--propina").style.display = "block";
+		}
+
+		document.getElementById("btn--calcular").addEventListener("click", calcularPropina);
+	</script>
+</body>
+</html>
